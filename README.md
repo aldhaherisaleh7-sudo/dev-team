@@ -1,273 +1,349 @@
-# ClickUp & GitHub Development Workflow
+# AI Development Team
 
-An AI skill for managing and executing software development workflows through ClickUp and GitHub, with human-controlled approvals at every important stage.
+A manually supervised multi-agent development workflow built with OpenCode.
 
-## Overview
+This repository defines a structured AI development team consisting of four specialized agents: Project Manager, Engineering Partner, Developer, and Tester.
 
-This skill enables an AI development assistant to collaborate with developers throughout the software development lifecycle.
+Each agent has a clearly defined responsibility, dedicated skills, and approval boundaries. The objective is to use AI to support the software development lifecycle while keeping the developer in control of decisions, implementation, and delivery.
 
-It connects:
+## 1. Objectives
 
-- **ClickUp:** Project management, task tracking, sprint planning, requirements, design documents, and test cases.
-- **GitHub:** Source code management, development branches, commits, and pull requests.
+- Organize software development into clearly defined responsibilities.
+- Separate business analysis, software design, implementation, and testing.
+- Maintain consistent development standards.
+- Produce small, reviewable, and shippable increments.
+- Prioritize maintainability, testability, and security.
+- Maintain traceability between ClickUp tasks and GitHub changes.
+- Keep all important decisions under human supervision.
 
-The AI assists with planning, designing, implementing, and testing features and bug fixes while following predefined development conventions.
+## 2. Team Structure
 
-**The developer remains in control of all execution activities and lifecycle transitions.**
+| Agent | Responsibility | Main Output |
+|---|---|---|
+| Project Manager | Requirements and project planning | Epics, User Stories, Backlog, Sprints |
+| Engineering Partner | Architecture and technical design | Architecture, Logical Design, Implementation Plan |
+| Developer | Application implementation | Application code and implementation report |
+| Tester | Independent verification | Test Cases, Test Results, Defect Reports |
 
-## Core Capabilities
+### Project Manager
 
-| Capability | Description |
-|---|---|
-| Project Initialization | Retrieve company, project, and task information from ClickUp. |
-| Sprint Planning | Organize tasks based on priority, dependencies, and implementation order. |
-| Task Analysis | Understand requirements, acceptance criteria, and technical constraints. |
-| Technical Design | Collaborate on optional technical designs and save approved documents to ClickUp tasks. |
-| Feature Development | Implement features after explicit authorization. |
-| Bug Fixing | Investigate and resolve bugs through the same development lifecycle. |
-| Git Management | Create branches and follow naming and commit conventions. |
-| Pull Requests | Push authorized changes and create PRs linked to ClickUp tasks. |
-| Quality Assurance | Prepare test cases, execute approved tests, and report results. |
+Responsible for understanding business requirements and defining WHAT the system should do.
 
-## Development Lifecycle
+Responsibilities:
+- Analyze project requirements.
+- Identify missing and ambiguous requirements.
+- Define functional and non-functional requirements.
+- Create Epics and User Stories.
+- Define acceptance criteria.
+- Organize the Product Backlog.
+- Plan sprint scope and objectives.
 
-Every feature and bug fix follows three phases:
+### Engineering Partner
 
-```text
-             DEVELOPMENT TASK
-                     |
-                     v
-             PLANNING & DESIGN
-                     |
-              User Approval
-                     |
-                     v
-                DEVELOPMENT
-                     |
-              User Approval
-                     |
-                     v
-                  TESTING
-                     |
-              User Approval
-                     |
-                     v
-                 COMPLETED
-```
+Responsible for defining HOW the system should be designed.
 
-### 1. Planning & Design
+Responsibilities:
+- Design system architecture.
+- Evaluate architectural alternatives and trade-offs.
+- Design individual features.
+- Define components, responsibilities, and interactions.
+- Identify technical risks.
+- Prepare implementation-ready plans.
+- Produce technical documentation and diagrams.
 
-- Analyze requirements and dependencies.
+### Developer
+
+Responsible for implementing approved designs.
+
+Responsibilities:
 - Inspect the existing codebase.
-- Suggest implementation approaches.
-- Prepare technical designs when necessary.
-- Save approved designs inside the corresponding ClickUp task.
+- Follow approved architecture and logical designs.
+- Implement small, reviewable increments.
+- Follow Clean Code and SOLID principles.
+- Prioritize maintainability, testability, and security.
+- Follow the established Git workflow.
+- Prepare changes for code review.
 
-Design documentation is optional and should only be created when needed.
+### Tester
 
-### 2. Development
+Responsible for independently verifying application behavior.
 
-- Create a development branch.
-- Implement authorized features or bug fixes.
-- Follow existing architecture and coding conventions.
-- Commit only when explicitly authorized.
-- Push only when explicitly authorized.
-- Open a PR after a successful authorized push.
+Responsibilities:
+- Analyze requirements and acceptance criteria.
+- Derive test scenarios and detailed test cases.
+- Present proposed test cases for user approval.
+- Implement approved tests.
+- Execute tests after approval.
+- Report defects and testing evidence.
+- Verify fixes and regression behavior.
 
-### 3. Testing
+## 3. Workflow
 
-- Prepare test scenarios.
-- Review test cases with the developer.
-- Save approved test cases to ClickUp.
-- Execute tests only when authorized.
-- Report actual and expected results.
-- Iterate based on feedback.
-
-## ClickUp Structure
-
-The workspace follows this hierarchy:
+The workflow is intentionally sequential and manually supervised.
 
 ```text
-Company
-└── Project
-    ├── Backlog
-    ├── Sprints
-    └── QA
+                  USER
+                   |
+                   v
+             PROJECT MANAGER
+                   |
+                   v
+          ENGINEERING PARTNER
+                   |
+                   v
+               DEVELOPER
+                   |
+                   v
+                TESTER
+                   |
+                   v
+             USER ACCEPTANCE
 ```
 
-Each ClickUp task represents a feature, bug fix, or technical task.
+The user manually invokes each agent and supervises every handoff.
 
-The task ID and URL must remain associated with its corresponding Git branch, commits, and pull request.
+**No agent automatically invokes another agent.**
 
-## Git Conventions
+Each stage produces an output for the user to review before proceeding.
 
-### Branch Naming
+### Stage 1: Project Planning
+
+The Project Manager analyzes the project, identifies uncertainties, and prepares the project structure, backlog, and sprint plan.
+
+### Stage 2: Engineering Design
+
+The Engineering Partner works with the user to establish the architecture or feature-level design.
+
+The design is reviewed and refined until the user approves it.
+
+### Stage 3: Development
+
+The Developer implements approved requirements and designs in small increments.
+
+### Stage 4: Testing
+
+The Tester independently derives test cases and presents them to the user.
+
+Test implementation and execution require separate explicit approvals.
+
+### Stage 5: Acceptance
+
+The user reviews the implementation and testing results before accepting the work.
+
+## 4. Approval Philosophy
+
+The user remains the final decision-maker.
+
+The following actions require explicit authorization:
+
+- Creating or modifying ClickUp records.
+- Approving architecture and technical decisions.
+- Committing changes.
+- Pushing changes.
+- Opening pull requests.
+- Merging pull requests.
+- Deploying changes.
+- Implementing test code.
+- Executing tests when required by the testing workflow.
+
+Approval of one action does not imply approval of another.
+
+## 5. Project Management with ClickUp
+
+ClickUp is the source of truth for project requirements, tasks, designs, priorities, sprint scope, and progress.
+
+Current project hierarchy:
 
 ```text
-<type>/<ticket-id>-<description>
+CAF (Company)
+└── MAINTENANCE SYSTEM (Project Folder)
+    ├── Sprints (Folder)
+    │   └── Sprint 1 (List)
+    ├── Backlog (Folder)
+    │   └── Product Backlog (List)
+    └── QA (Folder)
+        └── Test Scenarios & Cases Sprint 1 (List)
 ```
 
-Examples:
+### Task Workflow
 
 ```text
-feature/123-shopping-cart
-fix/323-food-doctype-issue
-chore/401-update-dependencies
-hotfix/450-payment-error
+To do
+  |
+  v
+Design
+  |
+  v
+Development
+  |
+  v
+Testing
+  |
+  v
+Completed
 ```
 
-### Commit Messages
+Developer completion does not automatically mean a task is completed. Testing and user acceptance are part of the overall delivery process.
 
-```text
-<type>: <ticket title>
+## 6. Git and GitHub Workflow
 
-Summary: <brief explanation of changes>
+Git is used for version control, while GitHub manages remote repositories and collaboration.
 
-Ticket: <ticket ID>
-URL: <ticket URL>
-```
-
-Supported types:
-
-- `feat`
-- `fix`
-- `chore`
-- `refactor`
-- `test`
-- `docs`
-
-### Branch Strategy
+### Main Branches
 
 | Branch | Purpose |
 |---|---|
-| `main` | Production |
-| `dev` | Integration and staging |
-| `feature/*` | New features |
-| `fix/*` | Bug fixes |
-| `chore/*` | Maintenance |
-| `hotfix/*` | Urgent production fixes |
+| `main` | Production-ready code |
+| `dev` | Integration and staging development |
 
-Feature, fix, and chore branches originate from `dev`.
+### Working Branches
 
-Hotfix branches originate from `main`.
+- `feature/` - New functionality.
+- `bugfix/` - Bug fixes.
+- `hotfix/` - Urgent production fixes.
+- `chore/` - Maintenance and tooling.
+- `refactor/` - Code restructuring.
 
-## Pull Request Requirements
-
-After an authorized push succeeds, the AI creates a pull request.
-
-| Branch | Target |
-|---|---|
-| `feature/*` | `dev` |
-| `fix/*` | `dev` |
-| `chore/*` | `dev` |
-| `hotfix/*` | `main` |
-
-Every PR must include:
-
-1. Feature or bug description.
-2. Summary of changes.
-3. Important technical details.
-4. Testing performed and results.
-5. ClickUp task ID.
-6. Direct ClickUp task URL.
-
-Direct pushes to `main` and `dev` are strictly prohibited.
-
-PR merging always requires explicit authorization.
-
-## Permission Model
-
-The AI operates under a human-controlled execution model.
-
-| Action | Permission |
-|---|---|
-| Retrieve ClickUp tasks | Allowed |
-| Analyze requirements | Allowed |
-| Inspect repository | Allowed |
-| Suggest sprint plans | Allowed |
-| Suggest technical designs | Allowed |
-| Prepare test cases | Allowed |
-| Create design documents | Upon instruction |
-| Save documents to ClickUp | Upon approval and instruction |
-| Change ClickUp status | Explicit instruction |
-| Create branches | Explicit instruction |
-| Implement features | Explicit instruction |
-| Fix bugs | Explicit instruction |
-| Execute tests | Explicit instruction |
-| Commit changes | Explicit instruction |
-| Push changes | Explicit instruction |
-| Create PR | After authorized successful push |
-| Merge PR | Explicit instruction |
-
-### Critical Rules
-
-- Implementing does not imply permission to commit.
-- Committing does not imply permission to push.
-- Pushing does not imply permission to merge.
-- Preparing tests does not imply permission to execute them.
-- Completing a phase does not imply permission to change ClickUp status.
-
-## Skill Structure
+Example:
 
 ```text
-clickup-github-development-workflow/
-│
-├── SKILLS
-├────── SKILL.md
-└── README.md
+feature/123-create-production-order
 ```
 
-- `SKILL.md`: Contains the detailed operational instructions, workflow rules, permissions, and execution conventions.
-- `README.md`: Explains the skill's purpose, capabilities, workflow, and usage.
+### Mandatory Git Rules
 
-## Usage Examples
+- Never push directly to `main`.
+- Never push directly to `dev`.
+- Commit only with explicit approval.
+- Push only with explicit approval.
+- Push only the authorized current working branch.
+- Open pull requests only with explicit approval.
+- Never merge or deploy without explicit approval.
 
-You can interact with the AI using natural-language instructions.
+Every pull request must include:
 
-**Initialize a project:**
+- Feature or bug description.
+- Implementation summary.
+- Actual testing results.
+- ClickUp task ID.
+- Direct ClickUp task link.
 
-> We are working on the Maintenance System project for CAF. Retrieve the tasks from the backlog and help me organize them into sprints.
+This ensures traceability between project requirements and code changes.
 
-**Analyze a task:**
+## 7. Engineering Principles
 
-> Analyze task 123 and explain its requirements, dependencies, and possible implementation approaches.
+The team follows:
 
-**Prepare technical design:**
+- Clean Code.
+- SOLID principles.
+- Separation of concerns.
+- Appropriate design patterns.
+- Maintainability.
+- Testability.
+- Security.
+- Small and reversible changes.
 
-> Let's design the implementation for task 123.
+Additional quality attributes should be considered according to the task and the user's instructions or approved requirements.
 
-**Start development:**
+The objective is not to introduce unnecessary abstractions or overengineer solutions.
 
-> Start development for task 123.
+## 8. Testing Philosophy
 
-**Save approved design:**
+Testing is independently managed by the Tester agent.
 
-> Save the approved design document to the ClickUp task.
+The testing workflow has three mandatory approval gates:
 
-**Commit changes:**
+1. **Test Case Approval:** Present all proposed test cases to the user before implementing tests.
+2. **Test Implementation Approval:** Present the implementation plan and obtain approval before writing or modifying test code.
+3. **Test Execution Approval:** Present the execution scope and obtain approval before running tests.
 
-> Commit the current changes using our commit convention.
+Approval at one stage does not automatically authorize the next stage.
 
-**Push and open PR:**
+The Developer owns application implementation. The Tester owns test implementation and verification.
 
-> Push the current branch and open a pull request.
+## 9. Repository Structure
 
-**Prepare test cases:**
+```text
+dev-team/
+│
+├── README.md
+├── AGENTS.md
+├── opencode.json
+│
+├── indexes/
+│   ├── agents.md
+│   └── skills.md
+│
+└── .opencode/
+    │
+    ├── agents/
+    │   ├── project-manager.md
+    │   ├── engineering-partner.md
+    │   ├── developer.md
+    │   └── tester.md
+    │
+    └── skills/
+        ├── pm-project-analysis/
+        │   └── SKILL.md
+        ├── pm-project-building/
+        │   └── SKILL.md
+        │
+        ├── ep-system-architecture/
+        │   └── SKILL.md
+        ├── ep-logical-design/
+        │   └── SKILL.md
+        ├── ep-implementation-planning/
+        │   └── SKILL.md
+        │
+        ├── dev-implementation/
+        │   └── SKILL.md
+        ├── dev-code-quality/
+        │   └── SKILL.md
+        │
+        ├── test-planning/
+        │   └── SKILL.md
+        ├── test-execution/
+        │   └── SKILL.md
+        │
+        ├── shared-clickup-rules/
+        │   └── SKILL.md
+        ├── shared-git-workflow/
+        │   └── SKILL.md
+        └── shared-security/
+            └── SKILL.md
+```
 
-> Prepare test cases for task 123 and show them to me for review.
+## 10. Shared Skills
 
-**Execute testing:**
+Shared skills define rules that apply across multiple agents.
 
-> Execute the approved test cases.
+| Skill | Purpose |
+|---|---|
+| `shared-clickup-rules` | ClickUp hierarchy, task conventions, and approval rules |
+| `shared-git-workflow` | Git version control and GitHub collaboration |
+| `shared-security` | Secure development, credentials, access control, and safe operations |
 
-**Update task status:**
+## 11. Design Philosophy
 
-> Move task 123 to Testing.
+This AI development team is designed around a few important principles:
+
+- **Human supervision:** AI agents assist rather than independently control the project.
+- **Separation of responsibilities:** Each agent has a clear role.
+- **Traceability:** Requirements, designs, code changes, and tests remain connected.
+- **Incremental delivery:** Prefer small, independently reviewable features.
+- **Reversibility:** Avoid unnecessary changes that are difficult to undo.
+- **Explicit approval:** Important actions require user authorization.
+- **Context efficiency:** Load only the skills and project information relevant to the current task.
+
+## 12. Getting Started
+
+1. Open the repository using OpenCode.
+2. Allow OpenCode to discover the configured agents and skills.
+3. Start with the Project Manager.
+4. Review and approve the project analysis.
+5. Continue manually through the Engineering Partner, Developer, and Tester.
+6. Review every important handoff before proceeding.
 
 ---
 
-## Fundamental Principle
-
-The developer controls **WHAT happens and WHEN it happens**.
-
-The AI is responsible for understanding **HOW to do it correctly**, preparing the work, executing explicitly authorized actions, and reporting the results.
+**The AI development team is a supervised engineering workflow, not an autonomous development pipeline.**

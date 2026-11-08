@@ -1,0 +1,10 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "default_agent": "project-manager",
+  "permission": {
+    "edit": "ask",
+    "bash": "ask",
+    "task": "deny",
+    "skill": "allow"
+  }
+}

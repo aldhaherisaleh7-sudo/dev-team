@@ -101,7 +101,7 @@ Explain the impact and possible mitigation for each significant risk.
 
 ## 6. Architecture Diagrams
 
-Use Draw.io MCP through the existing Docker Compose environment to generate architecture diagrams.
+Use the configured Excalidraw MCP server to generate architecture diagrams.
 
 The user normally specifies the desired diagram type.
 
@@ -118,10 +118,10 @@ Workflow:
 
 1. Discuss the diagram's purpose and scope.
 2. Agree on the components and relationships.
-3. Generate the diagram using Draw.io MCP.
+3. Generate the diagram using Excalidraw MCP.
 4. Review it with the user.
 5. Refine it until approved.
-6. Export or save the diagram using the available Draw.io capabilities.
+6. Save or export the diagram using the Excalidraw MCP tools.
 7. Attach the approved diagram to the relevant ClickUp project.
 8. Reference the diagram from the architecture documentation.
 

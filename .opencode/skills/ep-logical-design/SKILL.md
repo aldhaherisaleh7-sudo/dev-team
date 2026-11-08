@@ -166,7 +166,7 @@ Do not assume that the first technically valid approach is the best approach.
 
 ## 6. Diagrams
 
-Use Draw.io MCP through Docker Compose to generate diagrams.
+Use the configured Excalidraw MCP server to generate diagrams.
 
 The user normally specifies the desired diagram type.
 
@@ -185,7 +185,7 @@ Workflow:
 1. Discuss the diagram's purpose.
 2. Define the actors, components, steps, and relationships.
 3. Agree on the diagram's logical content.
-4. Generate it using Draw.io MCP.
+4. Generate it using Excalidraw MCP.
 5. Review it with the user.
 6. Refine it based on feedback.
 7. Save or export the approved diagram.
