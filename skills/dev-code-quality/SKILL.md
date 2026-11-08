@@ -175,7 +175,7 @@ Do not assume all attributes need equal consideration in every task.
 
 ## 8. Design Patterns
 
-Use design patterns only when they solve an actual problem.
+Use design patterns only when they solve an actual problem after user approval and understanding for the case.
 
 Examples:
 
